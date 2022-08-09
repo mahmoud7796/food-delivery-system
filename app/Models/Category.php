@@ -38,15 +38,15 @@ class Category extends Model
     ];
 
     public function scopeParentCategory($query){
-        $query -> whereNull('parent_id');
+        return $query -> whereNull("parent_id");
     }
 
     public function scopeSubParentCategory($query){
-        $query -> whereNotNull('parent_id');
+        return $query -> whereNotNull("parent_id");
     }
 
     public function getStatus(){
-        return $this -> is_active ==1  ? 'Active':'Deactive';
+        return $this -> is_active ==1  ? 'مفعل':'غير مفعل';
     }
 
     public function subCategories()

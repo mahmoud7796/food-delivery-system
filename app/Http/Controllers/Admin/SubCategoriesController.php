@@ -10,8 +10,8 @@ use DB;
 class SubCategoriesController extends Controller
 {
     public function index(){
-          $subCategories=category::with(['mainCategories'=>function ($q){
-            $q->select('id');
+           $subCategories=Category::with(['mainCategories'=>function ($q){
+            return $q->select('id','name');
         }])->SubParentCategory()->orderBy('id','DESC')->paginate(PAGINATION_COUMT);
         return view('admin.subcategories.index',compact('subCategories'));
     }
@@ -23,25 +23,13 @@ class SubCategoriesController extends Controller
 
     public function store(SubCategoryRequest $request){
         try {
-
-            if(!$request->has('status'))
-                $request->request->add(['status'=>0]);
-            else
-                $request->request->add(['status'=>1]);
-
-            DB::beginTransaction();
-            $category = category::create([
-                'parent_id'=> $request->main_category_id,
-                'slug' => $request -> slug,
-                'is_active' => $request -> status,
+             category::create([
+                 'name'=> $request->name,
+                 'parent_id'=> $request->main_category_id,
             ]);
-            $category-> name = $request->name;
-            $category -> save();
-            DB::commit();
             return redirect()->route('admin.subcategories')->with(['success'=>'تم الإضافة بنجاح']);
-
-        }catch (\Exception $e){
-            DB::rollback();
+        }catch (\Exception $ex){
+            //return $ex;
             return redirect()->route('admin.subcategories')->with(['error'=>'حاول قيما بعد']);
         }
 

@@ -67,37 +67,6 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> Slug </label>
-                                                            <input type="text" id=""
-                                                                   class="form-control"
-                                                                   placeholder=" Slug "
-                                                                   value="{{old('slug')}}"
-                                                                   name="slug">
-
-                                                            @error("slug")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox" value="1"
-                                                                   name="status"
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-                                                                  checked/>
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة</label>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
 

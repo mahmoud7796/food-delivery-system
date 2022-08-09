@@ -25,7 +25,6 @@ class MaincategoriesRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
-            'slug' => 'required|string|max:225|unique:categories,slug,'.$this->id,
         ];
     }
 }

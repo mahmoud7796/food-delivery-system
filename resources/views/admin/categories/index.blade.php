@@ -47,20 +47,15 @@
                                             class="table display nowrap table-striped table-bordered scroll-horizontal">
                                             <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Slug</th>
-                                                <th>الحالة</th>
+                                                <th>اسم القسم</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                                 @isset($categories)
                                                 @foreach($categories as $category)
                                             <tr>
                                                 <td>{{$category -> name}} </td>
-                                                <td>{{$category -> slug}} </td>
-                                                <td>{{$category -> getStatus()}}</td>
                                                 <td style="width: 40%">
                                                     <div class="btn-group" role="group"
                                                          aria-label="Basic example">
