@@ -25,6 +25,9 @@ class MaincategoriesRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
+            'photo' => 'required_without:id|mimes:jpg,jpeg,png'
+
+
         ];
     }
 }

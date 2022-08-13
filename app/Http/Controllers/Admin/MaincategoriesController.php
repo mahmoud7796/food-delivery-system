@@ -22,15 +22,15 @@ class MaincategoriesController extends Controller
 
     public function store(MaincategoriesRequest $request){
         try {
-          return $request;
+          $path = saveImage($request->photo,'categories');
           category::create([
-                    'name' => $request->name,
-                    'parent_id' => 0,
+              'name' => $request->name,
+              'photo' => $path,
           ]);
             return redirect()->route('admin.maincategories')->with(['success'=>'تم الإضافة بنجاح']);
 
         }catch (\Exception $e){
-            return $e;
+            //return $e;
             return redirect()->route('admin.maincategories')->with(['error'=>'حاول فيما بعد']);
         }
 
@@ -42,7 +42,9 @@ class MaincategoriesController extends Controller
                 return redirect()->route('admin.maincategories')->with(['error'=>'هذا القسم غير موجود']);
             }
             return view('admin.categories.edit', compact('mainCategory'));
-        }catch (\Exception $e){
+        }catch (\Exception $ex){
+           // return $ex;
+            return redirect()->route('admin.maincategories')->with(['error'=>'حاول فيما بعد']);
 
         }
 
@@ -54,14 +56,23 @@ class MaincategoriesController extends Controller
             $category = category::find($id);
             if(!$category)
                 return redirect()->route('admin.maincategories')->with(['error'=>'هذا القسم غير موجود']);
-
+            if($request->photo)
+            {
+                $path= public_path().$category->photo;
+                unlink($path);
+                $path = saveImage($request->photo,'categories');
+                $category->update([
+                    'photo' => $path,
+                ]);
+            }
             $category->update([
                 'name' => $request->name,
             ]);
             return redirect()->route('admin.maincategories')->with(['success'=>'تم التحديث بنجاح']);
 
-        }catch (\Exception $e){
-
+        }catch (\Exception $ex){
+            return $ex;
+            return redirect()->route('admin.maincategories')->with(['error'=>'حاول فيما بعد']);
         }
 
     }
@@ -70,10 +81,18 @@ class MaincategoriesController extends Controller
             $category = category::orderBy('id', 'DESC')->find($id);
             if(!$category)
                 return redirect()->route('admin.maincategories')->with(['error'=>'هذا القسم غير موجود']);
+            if($category->photo)
+            {
+                $path= public_path().$category->photo;
+                unlink($path);
+            }
             $category->delete();
             return redirect()->route('admin.maincategories')->with(['success'=>'تم الحذف']);
 
-        }catch (\Exception $e){
+        }catch (\Exception $ex){
+//            return $ex;
+            return redirect()->route('admin.maincategories')->with(['error'=>'حاول فيما بعد']);
+
 
         }
     }

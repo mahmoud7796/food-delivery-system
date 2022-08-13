@@ -47,10 +47,8 @@
                                             class="table display nowrap table-striped table-bordered scroll-horizontal">
                                             <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Main Category</th>
-                                                <th>Slug</th>
-                                                <th>الحالة</th>
+                                                <th>الإسم</th>
+                                                <th>القسم الرئيسى</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
@@ -60,9 +58,7 @@
                                                 @foreach($subCategories as $subcategory)
                                             <tr>
                                                 <td>{{$subcategory -> name}} </td>
-                                                <td>{{$subcategory->maincategories->name}}</td>
-                                                <td>{{$subcategory -> slug}} </td>
-                                                <td>{{$subcategory -> getStatus()}}</td>
+                                                <td>{{$subcategory->main->name}}</td>
                                                 <td style="width: 40%">
                                                     <div class="btn-group" role="group"
                                                          aria-label="Basic example">

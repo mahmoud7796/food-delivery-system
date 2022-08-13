@@ -10,9 +10,9 @@ use DB;
 class SubCategoriesController extends Controller
 {
     public function index(){
-           $subCategories=Category::with(['mainCategories'=>function ($q){
+             $subCategories=Category::with(['main'=>function ($q){
             return $q->select('id','name');
-        }])->SubParentCategory()->orderBy('id','DESC')->paginate(PAGINATION_COUMT);
+        }])->SubParentCategory()->orderBy('id','DESC')->get();
         return view('admin.subcategories.index',compact('subCategories'));
     }
 
@@ -23,6 +23,7 @@ class SubCategoriesController extends Controller
 
     public function store(SubCategoryRequest $request){
         try {
+             $path = saveImage('','')
              category::create([
                  'name'=> $request->name,
                  'parent_id'=> $request->main_category_id,
@@ -50,23 +51,15 @@ class SubCategoriesController extends Controller
 
     public function update(SubCategoryRequest $request,$id){
         try {
-
+            //return $request;
             $category = category::find($id);
             if(!$category)
                 return redirect()->route('admin.subcategories')->with(['error'=>'هذا القسم غير موجود']);
 
-            if(!$request->has('status'))
-                $request->request->add(['status'=>0]);
-            else
-                $request->request->add(['status'=>1]);
-
             $category->update([
                 'parent_id'=> $request->main_category_id,
-                'slug' => $request->slug,
-                'is_active' => $request->status,
+                'name'=> $request->name,
             ]);
-            $category->name= $request->name;
-            $category->save();
             return redirect()->route('admin.subcategories')->with(['success'=>'تم التحديث بنجاح']);
 
         }catch (\Exception $e){

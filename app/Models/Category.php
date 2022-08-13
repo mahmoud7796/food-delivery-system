@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -33,9 +32,6 @@ class Category extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
 
     public function scopeParentCategory($query){
         return $query -> whereNull("parent_id");
@@ -45,16 +41,12 @@ class Category extends Model
         return $query -> whereNotNull("parent_id");
     }
 
-    public function getStatus(){
-        return $this -> is_active ==1  ? 'مفعل':'غير مفعل';
-    }
-
     public function subCategories()
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function mainCategories()
+    public function main()
     {
         return $this->belongsTo(self::class, 'parent_id');
     }

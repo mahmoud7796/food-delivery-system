@@ -45,9 +45,9 @@
                                         <form class="form"
                                               action="{{route('admin.maincategories.store')}}"
                                               method="POST"
+                                              enctype="multipart/form-data"
                                               >
                                             @csrf
-
                                             <input name="id" value="" type="hidden">
 
                                             <div class="form-body">
@@ -70,6 +70,17 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group">
+                                                <label> صوره القسم </label>
+                                                <label id="projectinput7" class="file center-block">
+                                                    <input type="file" id="file" name="photo">
+                                                    <span class="file-custom"></span>
+                                                </label><br>
+                                                @error('photo')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
@@ -77,7 +88,7 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    <i class="la la-check-square-o"></i> إضافة
                                                 </button>
                                             </div>
                                         </form>

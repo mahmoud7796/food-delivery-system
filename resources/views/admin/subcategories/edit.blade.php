@@ -82,36 +82,6 @@
                                                             </select>
                                                         </div>
 
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> Slug </label>
-                                                            <input type="text" id=""
-                                                                   class="form-control"
-                                                                   placeholder=" Slug "
-                                                                   value="{{$subCategory->slug}}"
-                                                                   name="slug">
-
-                                                            @error("slug")
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mt-1">
-                                                            <input type="checkbox" value=""
-                                                                   name="status"
-                                                                   id="switcheryColor4"
-                                                                   class="switchery" data-color="success"
-                                                                   @if($subCategory->is_active == 1)checked @endif/>
-                                                            <label for="switcheryColor4"
-                                                                   class="card-title ml-1">الحالة</label>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
 
