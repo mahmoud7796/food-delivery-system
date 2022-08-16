@@ -10,28 +10,30 @@ use DB;
 class SubCategoriesController extends Controller
 {
     public function index(){
-             $subCategories=Category::with(['main'=>function ($q){
+        $subCategories=Category::with(['main'=>function ($q){
             return $q->select('id','name');
         }])->SubParentCategory()->orderBy('id','DESC')->get();
         return view('admin.subcategories.index',compact('subCategories'));
     }
 
     public function create(){
-          $mainCategories=category::ParentCategory()->get();
+        $mainCategories=category::ParentCategory()->get();
         return view('admin.subcategories.create',compact('mainCategories'));
     }
 
     public function store(SubCategoryRequest $request){
         try {
-             $path = saveImage('','')
-             category::create([
-                 'name'=> $request->name,
-                 'parent_id'=> $request->main_category_id,
+            $path = saveImage($request->photo,'subCategories');
+            Category::create([
+                'name' => $request->name,
+                'parent_id' => $request->main_category_id,
+                'photo' => $path
             ]);
             return redirect()->route('admin.subcategories')->with(['success'=>'تم الإضافة بنجاح']);
-        }catch (\Exception $ex){
-            //return $ex;
-            return redirect()->route('admin.subcategories')->with(['error'=>'حاول قيما بعد']);
+
+        }catch (\Exception $e){
+            //return $e;
+            return redirect()->route('admin.subCategories')->with(['error'=>'حاول فيما بعد']);
         }
 
     }
@@ -56,6 +58,15 @@ class SubCategoriesController extends Controller
             if(!$category)
                 return redirect()->route('admin.subcategories')->with(['error'=>'هذا القسم غير موجود']);
 
+            if($request->photo)
+            {
+                $path= public_path().$category->photo;
+                unlink($path);
+                $path = saveImage($request->photo,'subCategories');
+                $category->update([
+                    'photo' => $path,
+                ]);
+            }
             $category->update([
                 'parent_id'=> $request->main_category_id,
                 'name'=> $request->name,

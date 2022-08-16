@@ -49,6 +49,7 @@
                                             <tr>
                                                 <th>الإسم</th>
                                                 <th>القسم الرئيسى</th>
+                                                <th> صورة القسم</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
@@ -58,7 +59,10 @@
                                                 @foreach($subCategories as $subcategory)
                                             <tr>
                                                 <td>{{$subcategory -> name}} </td>
-                                                <td>{{$subcategory->main->name}}</td>
+                                                <td>{{$subcategory->main->name??"لايوجد قسم رئيسى أو تم حذفه"}}</td>
+                                                <td>
+                                                    <img alt="صورة القسم" width="50px" height="50px" src="{{asset($subcategory -> photo)??"لا توجد صورة"}}">
+                                                </td>
                                                 <td style="width: 40%">
                                                     <div class="btn-group" role="group"
                                                          aria-label="Basic example">
