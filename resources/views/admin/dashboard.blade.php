@@ -18,7 +18,7 @@
                                         <h4>إجمالى المبيعات</h4>
                                     </div>
                                     <div class="col-5 text-right">
-                                        <h4>$9,980</h4>
+                                        <h4>${{\App\Models\Order::sum('total_price')}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                         <h4>عدد المنتجات</h4>
                                     </div>
                                     <div class="col-5 text-right">
-                                        <h4>$1.2</h4>
+                                        <h4>{{\App\Models\Product::count()}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         <h4>عدد العملاء</h4>
                                     </div>
                                     <div class="col-5 text-right">
-                                        <h4>$1.2</h4>
+                                        <h4>{{\App\Models\User::count()}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -121,19 +121,26 @@
                                     <tr>
                                         <th>رقم الطلب</th>
                                         <th>العميل</th>
-                                        <th>السعر</th>
+{{--                                        <th>السعر</th>--}}
                                         <th>حالة الطلب</th>
                                         <th>الإجمالى</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @forelse(\App\Models\Order::latest()->take(10)->get() as $order)
                                     <tr class="bg-success bg-lighten-5">
-                                        <td>10583.4</td>
-                                        <td>10583.4</td>
-                                        <td>10583.4</td>
-                                        <td>10583.4</td>
-                                        <td>10583.4</td>
+                                        <td>{{$order->id}}</td>
+                                        <td>{{$order->user->name??''}}</td>
+{{--                                        <td></td>--}}
+                                        <td>{{$order->status}}</td>
+                                        <td>{{$order->total_price}}</td>
                                     </tr>
+                                    @empty
+
+                                    <tr aria-colspan="5" class="text-center"> لايوجد منتجات  </tr>
+                                    @endforelse
+
+
                                     </tbody>
                                 </table>
                             </div>
