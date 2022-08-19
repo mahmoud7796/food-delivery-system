@@ -91,7 +91,7 @@
 
                                             <div class="form-group">
                                                 <label for="projectinput1"> القسم الرئيسي </label>
-                                                <select name="category_id" class="select2 form-control">
+                                                <select name="category_id" id="category_id" class="select2 form-control">
                                                     <optgroup label="من فضلك أختر القسم الرئيسى">
                                                         @if(\App\Models\Category::ParentCategory()-> count() > 0 )
                                                             @foreach(\App\Models\Category::ParentCategory()->get() as $mainCategory)
@@ -105,34 +105,32 @@
 
                                             <div class="form-group">
                                                 <label for="projectinput1"> القسم الفرعي </label>
-                                                <select name="subcategory_id" class="select2 form-control">
-                                                    <optgroup label="من فضلك أختر القسم الفرعي">
-                                                        @if(\App\Models\Category::where('parent_id','!=','') -> count() > 0 )
-                                                            @foreach(\App\Models\Category::where('parent_id','!=','')->get() as $subCategory)
-                                                                <option @if($subCategory->id==$product->subcategory_id)  selected  @endif value="{{$subCategory -> id}}"> {{$subCategory -> name}} </option>
-                                                            @endforeach
-                                                        @endif
-                                                    </optgroup>
+                                                <select name="subcategory_id" id="subcategory_id" class="select2 form-control">
+                                                         @foreach(\App\Models\Category::where('parent_id',$product->category_id)->get() as $category )
+
+                                                             <option value="{{$category->id}}" @if($product->subcategory_id==$category->id) selected @endif>{{$category->name}}</option>
+
+                                                          @endforeach
                                                 </select>
                                             </div>
 
 
-                                            <div class="form-group">
-                                                <label for="projectinput1">صفات المنتج</label>
-                                                <input type="text"
-                                                       class="form-control"
-                                                       placeholder="صفات المنتج"
-                                                       value="{{$product->attributes}}"
-                                                       name="attributes">
-                                                @error("attributes")
-                                                <span class="text-danger"> {{$message}}</span>
-                                                @enderror
-                                            </div>
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="projectinput1">صفات المنتج</label>--}}
+{{--                                                <input type="text"--}}
+{{--                                                       class="form-control"--}}
+{{--                                                       placeholder="صفات المنتج"--}}
+{{--                                                       value="{{$product->attributes}}"--}}
+{{--                                                       name="attributes">--}}
+{{--                                                @error("attributes")--}}
+{{--                                                <span class="text-danger"> {{$message}}</span>--}}
+{{--                                                @enderror--}}
+{{--                                            </div>--}}
 
 
                                             <div class="form-group">
                                                 <label for="projectinput1"> السعر السابق للمنتج</label>
-                                                <input type="text"
+                                                <input type="number"
                                                        class="form-control"
                                                        placeholder="السعر السابق للمنتج"
                                                        value="{{$product->previous_price}}"
@@ -146,7 +144,7 @@
 
                                             <div class="form-group">
                                                 <label for="projectinput1"> سعر  المنتج</label>
-                                                <input type="text"
+                                                <input type="number"
                                                        class="form-control"
                                                        placeholder="سعر  المنتج"
                                                        value="{{$product->price}}"
@@ -192,5 +190,46 @@
     </div>
     </div>
     </div>
+
+@endsection
+
+
+
+
+@section('script')
+
+    <script>
+        $('#category_id').change(function (){
+
+            var id=$(this).val();
+            $.ajax({
+                type:'GET',
+                url:"{{route('admin.getSubCategoryFromMain')}}",
+                data:{
+                    id:id,
+                },
+
+                success:function(res){
+                    if(res['status']==true)
+                    {
+                        console.log(res['html']);
+                        $('#subcategory_id').html(res['html']);
+                    }
+                    else if(res['status']==false)
+                    {
+                        swal("  ", " يرجي اختيار قسم رئيسي اخر", "warning", {button: "حسناً",});
+
+                    }
+                },
+                error: function(data){
+                    location.reload();            }
+            });
+
+
+        });
+
+
+    </script>
+
 
 @endsection

@@ -32,10 +32,10 @@ class ProductController extends Controller
                 'name'=>'required|max:191|min:3',
                 'subcategory_id'=>'required|exists:categories,id',
                 'category_id'=>'required|exists:categories,id',
-                'attributes'=>'required',
+//                'attributes'=>'required',
                 'previous_price'=> 'required|regex:/^\d+(\.\d{1,2})?$/',
                 'price'=> 'required|regex:/^\d+(\.\d{1,2})?$/',
-                'details'=>'required',
+                'details'=>'nullable',
                 'photo' => 'required|mimes:jpg,jpeg,png'
 
             ]);
@@ -74,10 +74,10 @@ class ProductController extends Controller
             'name'=>'required|max:191|min:3',
             'subcategory_id'=>'required|exists:categories,id',
             'category_id'=>'required|exists:categories,id',
-            'attributes'=>'required',
+//            'attributes'=>'required',
             'previous_price'=> 'required|regex:/^\d+(\.\d{1,2})?$/',
             'price'=> 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'details'=>'required',
+            'details'=>'nullable',
             'photo' => 'nullable|mimes:jpg,jpeg,png'
 
         ]);
@@ -122,12 +122,29 @@ class ProductController extends Controller
             return redirect()->route('admin.products')->with(['success'=>'تم الحذف']);
 
         }catch (\Exception $ex){
-            return $ex;
+           // return $ex;
             return redirect()->route('admin.products')->with(['error'=>'حاول فيما بعد']);
 
 
         }
     }
+
+
+    public function getSubCategoryFromMain(Request $request){
+         $category=Category::findOrFail($request->id);
+         $subcategories=Category::where('parent_id',$request->id)->get();
+         if(count($subcategories)==0)
+             return response()->json(['status'=>false]);
+
+        $html= view('admin.products.parts.subcategories',compact('subcategories'))->render();
+
+        return response()->json(['status'=>true,'html'=>$html]);
+
+
+
+    }
+
+
 
 
 }

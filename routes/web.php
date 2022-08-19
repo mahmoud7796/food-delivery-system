@@ -72,6 +72,7 @@ Route::group(['middleware'=>'guest:web','prefix'=>'admin'], function(){
             Route::post('update/{id}', [\App\Http\Controllers\Admin\ProductController::class,'update'])->name('admin.products.update');
             Route::get('delete/{id}', [\App\Http\Controllers\Admin\ProductController::class,'delete'])->name('admin.products.delete');
 
+            Route::get('getSubCategoryFromMain',[\App\Http\Controllers\Admin\ProductController::class,'getSubCategoryFromMain'])->name('admin.getSubCategoryFromMain');
 
         });
 
