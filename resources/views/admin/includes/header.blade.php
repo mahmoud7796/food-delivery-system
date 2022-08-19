@@ -32,10 +32,10 @@
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">مرحبا
                   <span
-                      class="user-name text-bold-700">Diab</span>
+                      class="user-name text-bold-700">{{auth()->guard('admin')->user()->name??''}}</span>
                 </span>
                             <span class="avatar avatar-online">
-                  <img  style="height: 35px;" src="{{asset('assets/admin/images/portrait/small/avatar-s-6.png')}}" alt="avatar"><i></i></span>
+                  <img  style="height: 35px;" src="{{asset(auth()->guard('admin')->user()->photo??'assets/admin/images/portrait/small/avatar-s-6.png')}}" alt="avatar"><i></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{route('edit.profile')}}"><i

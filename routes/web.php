@@ -26,7 +26,7 @@ Route::group(['middleware'=>'guest:web','prefix'=>'admin'], function(){
 });
 ############### end Login && register #################
 
-    Route::group(['middleware' => 'auth:web','prefix'=>'admin'], function(){
+    Route::group(['middleware' => 'auth:admin','prefix'=>'admin'], function(){
         Route::get('/', [AdminController::class,'index'])->name('admin.dashboard');
         Route::get('/logout', [AuthController::class,'logout'])->name('admin.logout');
         Route::group(['prefix' => 'profile'], function () {
@@ -56,5 +56,53 @@ Route::group(['middleware'=>'guest:web','prefix'=>'admin'], function(){
             Route::get('delete/{id}', [SubCategoriesController::class,'delete'])->name('admin.subcategories.delete');
         });
 #######################end main categories##############################
+
+
+
+######################    El sdodey ######################################
+
+######################  product  ########################################
+
+        Route::group(['prefix' => 'products'], function () {
+
+            Route::get('/', [\App\Http\Controllers\Admin\ProductController::class,'index'])->name('admin.products');
+            Route::get('create', [\App\Http\Controllers\Admin\ProductController::class,'create'])->name('admin.products.create');
+            Route::post('store', [\App\Http\Controllers\Admin\ProductController::class,'store'])->name('admin.products.store');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\ProductController::class,'edit'])->name('admin.products.edit');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\ProductController::class,'update'])->name('admin.products.update');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\ProductController::class,'delete'])->name('admin.products.delete');
+
+
+        });
+
+
+   ###################  end Product ######################################################################
+
+
+
+
+        ######################  orders  ########################################
+
+        Route::group(['prefix' => 'orders'], function () {
+
+            Route::get('/', [\App\Http\Controllers\Admin\OrderController::class,'index'])->name('admin.orders');
+            Route::get('create', [\App\Http\Controllers\Admin\OrderController::class,'create'])->name('admin.orders.create');
+            Route::post('store', [\App\Http\Controllers\Admin\OrderController::class,'store'])->name('admin.orders.store');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\OrderController::class,'edit'])->name('admin.orders.edit');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\OrderController::class,'update'])->name('admin.orders.update');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'delete'])->name('admin.orders.delete');
+
+
+        });
+
+
+        ###################  end orders ######################################################################
+
+
+
+
+
+
+
 
     });

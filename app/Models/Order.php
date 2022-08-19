@@ -8,5 +8,8 @@ class Order extends Authenticatable
 {
     protected $guarded = [];
     public $timestamps=true;
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 
 }

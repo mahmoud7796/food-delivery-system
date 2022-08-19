@@ -35,33 +35,52 @@
             <li class="nav-item"><a href=""><i class="la la-male"></i>
                     <span class="menu-title" data-i18n="nav.dash.main">المنتجات  </span>
                     <span
-                        class="badge badge badge-success badge-pill float-right mr-2">{{\App\Models\Category::SubParentCategory()->count()}}</span>
+                        class="badge badge badge-success badge-pill float-right mr-2">{{\App\Models\Product::count()}}</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{route('admin.subcategories')}}"
+                    <li class="active"><a class="menu-item" href="{{route('admin.products')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.subcategories.create')}}" data-i18n="nav.dash.crypto">إضافة
-                            قسم فرعى جديد </a>
+                    <li><a class="menu-item" href="{{route('admin.products.create')}}" data-i18n="nav.dash.crypto">إضافة
+                            منتج جديد </a>
                     </li>
                 </ul>
             </li>
 
 
-{{--            <li class="nav-item"><a href=""><i class="la la-male"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">الطلاب  </span>
+
+            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">الطلبات  </span>
                     <span
-                        class="badge badge badge-warning  badge-pill float-right mr-2"></span>
+                        class="badge badge badge-success badge-pill float-right mr-2">{{\App\Models\Order::count()}}</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href=""
+                    <li class="active"><a class="menu-item" href="{{route('admin.orders')}}"
                                           data-i18n="nav.dash.ecommerce"> عرض الكل </a>
                     </li>
-                    <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
-                            طالب </a>
+                    <li><a class="menu-item" href="{{route('admin.orders.create')}}" data-i18n="nav.dash.crypto">إضافة
+                            منتج جديد </a>
                     </li>
                 </ul>
-            </li>--}}
+            </li>
+
+
+
+
+            {{--            <li class="nav-item"><a href=""><i class="la la-male"></i>
+                                <span class="menu-title" data-i18n="nav.dash.main">الطلاب  </span>
+                                <span
+                                    class="badge badge badge-warning  badge-pill float-right mr-2"></span>
+                            </a>
+                            <ul class="menu-content">
+                                <li class="active"><a class="menu-item" href=""
+                                                      data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                                </li>
+                                <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">أضافة
+                                        طالب </a>
+                                </li>
+                            </ul>
+                        </li>--}}
 
 
 {{--

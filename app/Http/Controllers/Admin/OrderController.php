@@ -5,22 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MaincategoriesRequest;
 use App\Models\category;
+use App\Models\Order;
 use DB;
+use Illuminate\Http\Request;
 
 
 class OrderController extends Controller
 {
 
     public function index(){
-        $categories = Category::ParentCategory()->orderBy('id','DESC')->paginate(PAGINATION_COUMT);
-        return view('admin.categories.index',compact('categories'));
+
+        $orders = Order::orderBy('id','DESC')->paginate(PAGINATION_COUMT);
+        return view('admin.orders.index',compact('orders'));
     }
 
     public function create(){
-        return view('admin.categories.create');
+        return view('admin.orders.create');
     }
 
-    public function store(MaincategoriesRequest $request){
+    public function store(Request $request){
+        return  $request;
         try {
           $path = saveImage($request->photo,'categories');
           category::create([
@@ -78,20 +82,16 @@ class OrderController extends Controller
     }
     public function delete($id){
         try{
-            $category = category::orderBy('id', 'DESC')->find($id);
-            if(!$category)
-                return redirect()->route('admin.maincategories')->with(['error'=>'هذا القسم غير موجود']);
-            if($category->photo)
-            {
-                $path= public_path().$category->photo;
-                unlink($path);
-            }
-            $category->delete();
-            return redirect()->route('admin.maincategories')->with(['success'=>'تم الحذف']);
+            $order = Order::orderBy('id', 'DESC')->find($id);
+            if(!$order)
+                return redirect()->route('admin.orders')->with(['error'=>'هذا الطلب غير موجود']);
+
+            $order->delete();
+            return redirect()->route('admin.orders')->with(['success'=>'تم الحذف']);
 
         }catch (\Exception $ex){
 //            return $ex;
-            return redirect()->route('admin.maincategories')->with(['error'=>'حاول فيما بعد']);
+            return redirect()->route('admin.orders')->with(['error'=>'حاول فيما بعد']);
 
 
         }

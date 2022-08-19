@@ -40,7 +40,7 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('password.update.profile')}}"
+                                        <form class="form" id="myForm" action="{{route('password.update.profile')}}"
                                               method="post"
                                               >
                                             @csrf
@@ -112,3 +112,14 @@
 
 
 @stop
+
+@section('script')
+    <script>
+        $('#myForm').onsubmit(function (e){
+            e.preventDefault();
+            alert(true);
+        });
+
+    </script>
+
+@endsection

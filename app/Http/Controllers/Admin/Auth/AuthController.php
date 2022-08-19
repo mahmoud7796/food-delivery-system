@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function postLogin(LoginRequest $request)
     {
         try {
-            if (auth()->guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
                 session()->regenerate();
                 return redirect()->route('admin.dashboard');
             } else
