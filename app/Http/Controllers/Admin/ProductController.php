@@ -38,7 +38,34 @@ class ProductController extends Controller
                 'details'=>'nullable',
                 'photo' => 'required|mimes:jpg,jpeg,png'
 
-            ]);
+            ] ,
+
+        [
+
+            'name.required'=>'يرجي ادخال اسم المنتج ',
+            'name.max'=>'اسم المنتج يجب الا تزيد عن 191 حرف',
+            'name.min'=>'اسم المنتج يجب الا تقل عن 3 حرف',
+             'subcategory_id.required'=>'يرجي اختيار قسم فرعي',
+            'category_id.required'=>'يرجي اختيار قسم رئيسي',
+            'subcategory_id.exists'=>' يرجي اختيار قسم فرعي  مدرج لدينا',
+            'category_id.exists'=>' يرجي اختيار قسم رئيسي مدرج لدينا ',
+            'previous_price.required'=>'يرجي ادخال السعر السابق',
+            'previous_price.regex'=>'يرجي  التاكد من صيغة السعر السابق',
+            'price.required'=>'يرجي ادخال السعر',
+            'price.regex'=>'يرجي التاكد من صيغة السعر',
+            'photo.required'=>'يرجي رفع صورة',
+            'photo.mimes'=>'يرجي ان تكون الصورة من صيغة jpg او jpeg او png'
+
+
+
+
+
+
+
+        ]
+
+
+        );
         try {
           $path = saveImage($request->photo,'products');
 
@@ -80,7 +107,26 @@ class ProductController extends Controller
             'details'=>'nullable',
             'photo' => 'nullable|mimes:jpg,jpeg,png'
 
-        ]);
+        ]
+            ,
+
+            [
+                'name.required'=>'يرجي ادخال اسم المنتج ',
+                'name.max'=>'اسم المنتج يجب الا تزيد عن 191 حرف',
+                'name.min'=>'اسم المنتج يجب الا تقل عن 3 حرف',
+                'subcategory_id.required'=>'يرجي اختيار قسم فرعي',
+                'category_id.required'=>'يرجي اختيار قسم رئيسي',
+                'subcategory_id.exists'=>' يرجي اختيار قسم فرعي  مدرج لدينا',
+                'category_id.exists'=>' يرجي اختيار قسم رئيسي مدرج لدينا ',
+                'previous_price.required'=>'يرجي ادخال السعر السابق',
+                'previous_price.regex'=>'يرجي  التاكد من صيغة السعر السابق',
+                'price.required'=>'يرجي ادخال السعر',
+                'price.regex'=>'يرجي التاكد من صيغة السعر',
+                'photo.required'=>'يرجي رفع صورة',
+                'photo.mimes'=>'يرجي ان تكون الصورة من صيغة jpg او jpeg او png'
+
+            ]
+        );
 
         try {
 

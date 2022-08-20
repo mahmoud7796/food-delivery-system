@@ -31,7 +31,12 @@ class ResetPassRequest extends FormRequest
     public function messages()
     {
         return [
-            'password.regex' => 'Password must contain at least one number, both uppercase and lowercase letters and symbol.',
+            'password.regex' => 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل ، بأحرف كبيرة وصغيرة ورمز.',
+            'password.required'=>'يرجي ادخال كلمة المرور',
+            'password.min' => ' كلمة المرور  يجب الا تقل عن 8 احرف',
+            'password_confirmation.confirmed' => ' كلمة المرور  غير مطابقة',
+
+
         ];
     }
 }

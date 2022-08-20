@@ -29,4 +29,23 @@ class profileRequest extends FormRequest
             //'password'  => 'nullable|confirmed|min:8'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'يرجي ادخال اسم المشرف',
+            'name.string'=>'اسم القسم الفرعي لابد ان يكون نص',
+
+            'email.required' => 'يرجي ادخال بريد الكتروني',
+            'email.email' => 'هذا الحقل لابد ان يكون بريد الكتروني ',
+            'email.unique' => 'هذا البريد الالكتروني مستخدم من قبل ',
+
+
+        ];
+    }
+
+
+
+
+
 }

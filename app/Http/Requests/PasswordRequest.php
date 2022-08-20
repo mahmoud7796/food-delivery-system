@@ -25,8 +25,26 @@ class passwordRequest extends FormRequest
     {
         return [
             'current_password'  => 'required',
-            'password_confirmation'  => 'required|min:8',
-            'password'  => 'required|confirmed|min:8'
+            'password_confirmation'  => 'required|min:8|confirmed',
+            'password'  => 'required|min:8'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'current_password.required' => 'يرجي ادخال كلمة المرور الحالية',
+
+            'password.required' => 'يرجي ادخال كلمة المرور الجديدة',
+            'password.min' => ' كلمة المرور الجديدة يجب الا تقل عن 8 احرف',
+            'password_confirmation.required' => 'يرجي تاكيد كلمة المرور الجديدة',
+            'password_confirmation.min' => ' كلمة المرور الجديدة يجب الا تقل عن 8 احرف',
+            'password_confirmation.confirmed' => ' كلمة المرور الجديدة غير مطابقة',
+            'password.confirmed' => ' كلمة المرور الجديدة غير مطابقة',
+
+
+
+        ];
+    }
+
 }

@@ -28,4 +28,21 @@ class SubCategoryRequest extends FormRequest
             'main_category_id' => 'required|exists:categories,id',
             ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'يرجي ادخال اسم القسم الفرعي',
+            'name.string'=>'اسم القسم الفرعي لابد ان يكون نص',
+            'name.max'=>'اسم القسم الفرعي لابد ان لايزيد عن 100 حرف',
+            'main_category_id.required' => 'يرجي اختيار قسم رئيسي',
+            'main_category_id.exists' => 'عفوا القسم الرئيسي الزي ادخلتة غير مدرج لدينا',
+
+        ];
+    }
+
+
+
+
 }
