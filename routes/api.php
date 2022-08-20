@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+#######  test github
 ####### Login && Register ########
 Route::post('/auth',[AuthController::class,'registerOrLogin']);
 ####### End Login && Register ########

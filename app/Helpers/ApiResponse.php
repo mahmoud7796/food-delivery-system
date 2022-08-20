@@ -39,6 +39,9 @@ class ApiResponse
         $this->body['status'] = true;
         return $this;
     }
+
+
+
     public function setError($message): object
     {
         $this->body['message'] = $message;
