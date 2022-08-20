@@ -44,6 +44,7 @@ Route::group(['middleware'=>'auth:sanctum'], function(){
     ######## Connections ################
     Route::group(['prefix'=>'product','middleware'=>'auth:sanctum','controller'=>ProductController::class], function(){
         Route::post('/{id}', 'getProductsAndSubProductsByMainCategory');
+        Route::get('/productDetails/{id}', 'productDetails');
 
     });
 });
@@ -63,10 +64,44 @@ Route::group(['middleware'=>'auth:sanctum'], function(){
         Route::post('/store', 'store');
 
 
+
+
     });
 });
 
 ################ end ##################################
+
+
+
+
+
+######## product By MainCategory #############
+
+Route::group(['middleware'=>'auth:sanctum'], function(){
+
+    ######## Connections ################
+    Route::group(['prefix'=>'cart','middleware'=>'auth:sanctum','controller'=>\App\Http\Controllers\Api\CartController::class], function(){
+
+        Route::get('/userCart', 'userCart');
+        Route::post('/storeOrUpdate', 'storeOrUpdate');
+        Route::get('/deleteUserCart', 'deleteUserCart');
+
+
+
+
+
+
+    });
+});
+
+################ end ##################################
+
+
+
+
+
+
+
 
 
 
