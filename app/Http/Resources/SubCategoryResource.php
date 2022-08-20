@@ -19,8 +19,7 @@ class SubCategoryResource extends JsonResource
             "name"=> $this->name,
             "photo"=>asset( $this->photo),
             "mainCategory"=>new CategoryResource($this->whenLoaded('main')) ,
-
-
+            "products"=>ProductResource::collection($this->whenLoaded('productSub')),
         ];
     }
 }

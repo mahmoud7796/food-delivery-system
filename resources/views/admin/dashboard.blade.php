@@ -42,7 +42,7 @@
                                         <h4>إجمالى الطلبات</h4>
                                     </div>
                                     <div class="col-5 text-right">
-                                        <h4>$944</h4>
+                                        <h4>{{\App\Models\Order::count()}}</h4>
                                     </div>
                                 </div>
                             </div>
