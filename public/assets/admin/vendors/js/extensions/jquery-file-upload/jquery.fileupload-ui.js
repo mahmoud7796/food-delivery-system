@@ -1,5 +1,5 @@
 /*
- * jQuery File Upload User Interface Plugin
+ * jQuery File Upload Auth Interface Plugin
  * https://github.com/blueimp/jQuery-File-Upload
  *
  * Copyright 2010, Sebastian Tschan

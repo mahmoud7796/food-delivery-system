@@ -170,7 +170,7 @@ var
 
 		var originalInput = input, inputIsNegative, output = '';
 
-		// User defined pre-decoder. Result must be a non empty string.
+		// Auth defined pre-decoder. Result must be a non empty string.
 		if ( undo ) {
 			input = undo(input);
 		}

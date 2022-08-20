@@ -5785,7 +5785,7 @@
     "Esc": "singleSelection"
   };
   // Note that the save and find-related commands aren't defined by
-  // default. User code or addons can define them. Unknown commands
+  // default. Auth code or addons can define them. Unknown commands
   // are simply ignored.
   keyMap.pcDefault = {
     "Ctrl-A": "selectAll", "Ctrl-D": "deleteLine", "Ctrl-Z": "undo", "Shift-Ctrl-Z": "redo", "Ctrl-Y": "redo",

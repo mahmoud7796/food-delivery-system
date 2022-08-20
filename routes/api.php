@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\MaincategoriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+####### Login && Register ########
+Route::post('/auth',[AuthController::class,'registerOrLogin']);
+####### End Login && Register ########
+
+####### Categories ########
+Route::group(['middleware'=>'auth:sanctum'], function(){
+
+    ######## Connections ################
+    Route::group(['prefix'=>'category','middleware'=>'auth:sanctum','controller'=>MaincategoriesController::class], function(){
+        Route::get('/', 'index');
+        Route::post('{id}', 'getSubCategoryOfMainCategory');
+
+    });
 });
+
+####### End Categories ####
+

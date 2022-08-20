@@ -90,7 +90,7 @@
 
 
     /***********************************************************
-    *               New User - Page Visist Stats               *
+    *               New Auth - Page Visist Stats               *
     ***********************************************************/
     //Get the context of the Chart canvas element we want to select
     var ctx2 = document.getElementById("line-stacked-area").getContext("2d");

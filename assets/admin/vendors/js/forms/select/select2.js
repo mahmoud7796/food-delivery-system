@@ -1533,11 +1533,11 @@ S2.define('select2/selection/single',[
     });
 
     this.$selection.on('focus', function (evt) {
-      // User focuses on the container
+      // Auth focuses on the container
     });
 
     this.$selection.on('blur', function (evt) {
-      // User exits the container
+      // Auth exits the container
     });
 
     container.on('focus', function (evt) {
