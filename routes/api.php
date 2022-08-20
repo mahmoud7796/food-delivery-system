@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\MaincategoriesController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
  //test
 //Madaaaaa
-=======
+
 #######  test github
 ####### Login && Register ########
 Route::post('/auth',[AuthController::class,'registerOrLogin']);
@@ -34,4 +35,46 @@ Route::group(['middleware'=>'auth:sanctum'], function(){
 });
 
 ####### End Categories ####
+
+
+######## product By MainCategory #############
+
+Route::group(['middleware'=>'auth:sanctum'], function(){
+
+    ######## Connections ################
+    Route::group(['prefix'=>'product','middleware'=>'auth:sanctum','controller'=>ProductController::class], function(){
+        Route::post('/{id}', 'getProductsAndSubProductsByMainCategory');
+
+    });
+});
+
+################ end ##################################
+
+
+
+######## product By MainCategory #############
+
+Route::group(['middleware'=>'auth:sanctum'], function(){
+
+    ######## Connections ################
+    Route::group(['prefix'=>'order','middleware'=>'auth:sanctum','controller'=>\App\Http\Controllers\Api\OrderController::class], function(){
+
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
+
+
+    });
+});
+
+################ end ##################################
+
+
+
+
+
+
+
+
+
+
 

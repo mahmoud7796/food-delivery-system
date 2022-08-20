@@ -30,7 +30,7 @@ class ProductController extends Controller
 
         $data = $request->validate([
                 'name'=>'required|max:191|min:3',
-                'subcategory_id'=>'required|exists:categories,id',
+                'subcategory_id'=>'nullable|exists:categories,id',
                 'category_id'=>'required|exists:categories,id',
 //                'attributes'=>'required',
                 'previous_price'=> 'required|regex:/^\d+(\.\d{1,2})?$/',
@@ -99,7 +99,7 @@ class ProductController extends Controller
     public function update(Request $request,$id){
         $data = $request->validate([
             'name'=>'required|max:191|min:3',
-            'subcategory_id'=>'required|exists:categories,id',
+            'subcategory_id'=>'nullable|exists:categories,id',
             'category_id'=>'required|exists:categories,id',
 //            'attributes'=>'required',
             'previous_price'=> 'required|regex:/^\d+(\.\d{1,2})?$/',
