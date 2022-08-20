@@ -81,6 +81,29 @@ Route::group(['middleware'=>'guest:web','prefix'=>'admin'], function(){
 
 
 
+        ############### PayMent #############################################
+
+
+        Route::group(['prefix' => 'payments'], function () {
+
+            Route::get('/', [\App\Http\Controllers\Admin\PaymentController::class,'index'])->name('admin.payments');
+            Route::get('create', [\App\Http\Controllers\Admin\PaymentController::class,'create'])->name('admin.payments.create');
+            Route::post('store', [\App\Http\Controllers\Admin\PaymentController::class,'store'])->name('admin.payments.store');
+            Route::get('edit/{id}', [\App\Http\Controllers\Admin\PaymentController::class,'edit'])->name('admin.payments.edit');
+            Route::post('update/{id}', [\App\Http\Controllers\Admin\PaymentController::class,'update'])->name('admin.payments.update');
+            Route::get('delete/{id}', [\App\Http\Controllers\Admin\PaymentController::class,'delete'])->name('admin.payments.delete');
+
+
+        });
+
+
+    ###############################  endPayment #################################################################
+
+
+
+
+
+
 
         ######################  orders  ########################################
 

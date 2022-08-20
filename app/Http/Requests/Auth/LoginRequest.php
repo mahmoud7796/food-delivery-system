@@ -28,4 +28,16 @@ class LoginRequest extends FormRequest
             'password' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'يرجي ادخال البريد الالكتروني',
+            'email.email' => 'يجب ان يكون بريد الكتروني',
+            'password.required'=>'يرجي ادخال كلمة المرور'
+        ];
+    }
+
+
+
 }

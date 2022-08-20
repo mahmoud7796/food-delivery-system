@@ -30,4 +30,17 @@ class MaincategoriesRequest extends FormRequest
 
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'يرجي ادخال اسم القسم الرئيسي',
+            'name.string'=>'اسم القسم الرئيسي لابد ان يكون نص',
+            'name.max'=>'اسم القسم الرئيسي لابد ان لايزيد عن 100 حرف',
+            'photo.required' => 'يرجي تحميل صورة القسم الرئيسي',
+            'photo.mimes'=>'يرجي ان تكون الصورة من صيغة jpg او jpeg او png'
+
+        ];
+    }
+
 }

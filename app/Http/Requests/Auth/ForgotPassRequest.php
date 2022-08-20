@@ -25,6 +25,17 @@ class ForgotPassRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
+        ] ;
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'يرجي ادخال البريد الالكتروني',
+            'body.email' => 'يجب ان يكون بريد الكتروني',
         ];
     }
+
+
+
 }
