@@ -93,25 +93,15 @@
                                                             {{$order->order_note}}
                                                         </td>
                                                         <td>
-
-                                                            @if($order->status=='pending')
-
-                                                            @elseif($order->status=='processing')
-
-
-                                                            @elseif($order->status=='completed')
-
-
-                                                            @elseif($order->status=='declined')
-
-
-
-                                                            @elseif($order->status=='on delivery')
-
-
-                                                            @endif
-
-
+                                                            <form action="{{route('admin.orders.changeStatus',$order->id)}}" method="get">
+                                                            <select name="status" onchange="this.form.submit()" class="form-select changeStatus" aria-label="Default select example">
+                                                                <option value="pending" @if($order->status=='pending')   selected @endif>pending</option>
+                                                                <option value="processing" @if($order->status=='processing')  selected  @endif    >processing</option>
+                                                                <option value="completed" @if($order->status=='completed') selected @endif   >completed</option>
+                                                                <option value="declined" @if($order->status=='declined') selected @endif >declined</option>
+                                                                <option value="on delivery" @if($order->status=='on delivery') selected   @endif >on delivery</option>
+                                                            </select>
+                                                            </form>
                                                         </td>
                                                         <td style="width: 40%">
                                                             <div class="btn-group" role="group"
@@ -148,3 +138,21 @@
 
 
 @endsection
+
+
+
+@section('script')
+<script>
+    $('.changeStatus').onchange(function (e){
+
+        var status=$(this).val();
+
+    });
+
+
+</script>
+
+
+
+@endsection
+

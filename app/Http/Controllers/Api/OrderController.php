@@ -5,14 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
-use App\Http\Resources\CategoryResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Cart;
-use App\Models\Category;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\ProductOrder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -28,7 +25,7 @@ class OrderController extends Controller
 
         try
         {
-            $orders = Order::with(['productOrder.product','user'])->get();
+            $orders = Order::where('user_id',Auth::id())->with(['productOrder.product','user'])->get();
 
             return $this->apiResponse->setSuccess(__("data loaded successfully"))->setData(OrderResource::collection($orders) )->getJsonResponse();
         } catch (\Exception $exception)

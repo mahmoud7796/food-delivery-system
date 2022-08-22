@@ -6,10 +6,8 @@ use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartRequest;
 use App\Http\Resources\CartResource;
-use App\Http\Resources\ProductResource;
 use App\Models\Cart;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -24,9 +22,13 @@ class CartController extends Controller
         try
         {
             $carts = Cart::where('user_id',Auth::user()->id)->get();
-
-
-            return $this->apiResponse->setSuccess(__("data loaded successfully"))->setData(CartResource::collection($carts))->getJsonResponse();
+            if($carts->isEmpty())
+            {
+                return $this->apiResponse->setError('Cart is empty')->setData()->getJsonResponse();
+            }
+            $paymentInfo['cart']= CartResource::collection($carts);
+            $paymentInfo['total'] = Cart::where('user_id',Auth::user()->id)->sum('sum');
+            return $this->apiResponse->setSuccess(__("data loaded successfully"))->setData($paymentInfo)->getJsonResponse();
         } catch (\Exception $exception)
         {
             return $this->apiResponse->setError(__($exception->getMessage()))->setData()->getJsonResponse();
@@ -62,7 +64,23 @@ class CartController extends Controller
 
         try
         {
-            $cart=Cart::where('user_id',Auth::user()->id)->where('product_id',$request->product_id)->first();
+            $cart=Cart::where('user_id',Auth::id())->where('product_id',$request->product_id)->first();
+
+
+            if ($request->quantity==0)
+            {
+                $cart->delete();
+
+                $carts=Cart::with(['user','product'])->where('user_id',Auth::user()->id)->get();
+                //$paymentInfo = ;
+               if(count($carts)==0){
+
+                   return $this->apiResponse->setSuccess(__("your cart is empty now "))->setData()->getJsonResponse();
+
+               }
+                return $this->apiResponse->setSuccess(__("data loaded successfully"))->setData(CartResource::collection($carts))->getJsonResponse();
+            }
+
             $sum=(Product::find($request->product_id)->price??0)*$request->quantity;
 
             if(!$cart){
@@ -90,8 +108,8 @@ class CartController extends Controller
             }
 
             $carts=Cart::with(['user','product'])->where('user_id',Auth::user()->id)->get();
-
             return $this->apiResponse->setSuccess(__("data loaded successfully"))->setData(CartResource::collection($carts))->getJsonResponse();
+
         } catch (\Exception $exception)
         {
             return $this->apiResponse->setError(__($exception->getMessage()))->setData()->getJsonResponse();

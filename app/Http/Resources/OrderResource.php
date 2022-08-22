@@ -25,8 +25,11 @@ class OrderResource extends JsonResource
             "customer_phone"=>$this->customer_phone,
             "customer_address"=>$this->customer_address,
             "customer_city"=>$this->customer_city,
+            "total_price"=>$this->total_price,
+            "shipping_cost"=>$this->shipping_cost,
+            "price"=>$this->price,
             "user"=>new UserResource($this->whenLoaded('user')),
-              "productOrder"=>ProductOrderResource::collection($this->whenLoaded('productOrder')),
+            "productOrder"=>ProductOrderResource::collection($this->whenLoaded('productOrder')),
 
 
 
