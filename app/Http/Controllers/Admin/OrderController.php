@@ -98,4 +98,12 @@ class OrderController extends Controller
     }
 
 
+
+    public function changeStatus(Request $request,$id){
+        $order=Order::findOrFail($id);
+        $order->status=$request->status;
+        $order->save();
+        return redirect()->route('admin.orders');
+    }
+
 }

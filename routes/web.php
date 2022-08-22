@@ -116,6 +116,7 @@ Route::group(['middleware'=>'guest:web','prefix'=>'admin'], function(){
             Route::post('update/{id}', [\App\Http\Controllers\Admin\OrderController::class,'update'])->name('admin.orders.update');
             Route::get('delete/{id}', [\App\Http\Controllers\Admin\OrderController::class,'delete'])->name('admin.orders.delete');
 
+            Route::get('changeStatus/{id}', [\App\Http\Controllers\Admin\OrderController::class,'changeStatus'])->name('admin.orders.changeStatus');
 
         });
 
